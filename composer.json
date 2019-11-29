@@ -1,0 +1,25 @@
+{
+    "name": "tiderjian/qs-pay",
+    "description": "payment package",
+    "type": "library",
+    "keywords": ["alipay", "we-pay", "union-pay"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tiderjian",
+            "email": "tider_yatsen@hotmail.com"
+        }
+    ],
+    "require": {
+        "tiderjian/think-core": "^5.0",
+        "zoujingli/wechat-developer": "^1.2",
+        "overtrue/wechat": "~4.0",
+        "zhangv/union-pay": "^0.8.13",
+        "mobiledetect/mobiledetectlib": "^2.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Qspay\\": "src"
+        }
+    }
+}
