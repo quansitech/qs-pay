@@ -99,7 +99,7 @@ $config = [
 ];
 
 $pay = Qspay::instance('wepay', $config);
-$pay->notifyHandle(function($out_trade_no){
+$pay->notifyHandle(function($notify_param){
     //处理业务逻辑
     //返回 true 表示处理成功
     //返回 错误字符串表示处理失败
@@ -150,7 +150,7 @@ $config = [
 ];
 
 $pay = Qspay::instance('alipay', $config);
-$pay->notifyHandle(function($out_trade_no){
+$pay->notifyHandle(function($notify_param){
     //处理业务逻辑
     //返回 true 表示处理成功
     //返回 错误字符串表示处理失败
