@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "tiderjian/think-core": "^5.0",
+        "tiderjian/think-core": "*",
         "zoujingli/wechat-developer": "^1.2",
         "overtrue/wechat": "~4.0",
         "zhangv/union-pay": "^0.8.13",
