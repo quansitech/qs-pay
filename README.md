@@ -108,10 +108,12 @@ $pay->notifyHandle(function($notify_param){
 
 ### 支付宝
 
-#### PC AND WAP
+
+#### 新版接口 PC AND WAP
 程序自动判断PC和WAP的使用场景
 ````php
 $config = [
+    'interface_type' => Qspay\Alipay::ALIPAY_INTERFACE_TYPE_DONATE_NEW,
     // 沙箱模式
     'debug'       => false,
     // 应用ID
@@ -134,9 +136,10 @@ echo $pay->pay([
 ]);
 ````
 
-#### notify
+#### 新版接口 notify
 ```php
 $config = [
+    'interface_type' => Qspay\Alipay::ALIPAY_INTERFACE_TYPE_DONATE_NEW,
     // 沙箱模式
     'debug'       => false,
     // 应用ID
@@ -156,6 +159,61 @@ $pay->notifyHandle(function($notify_param){
     //返回 错误字符串表示处理失败
 });
 ```
+
+#### 旧版接口 PC AND WAP
+```php
+$config = [
+    'interface_type' => Qspay\Alipay::ALIPAY_INTERFACE_TYPE_DONATEV3,
+    //合作伙伴身份(PID)
+    'partner' => ***************,
+    //MD5密钥
+    'key'  => *************,
+    // 支付宝登录邮箱
+    'seller_email' => ********************,
+    //采用传输协议 http or https
+    'transport' => ****,
+    // 支付成功回调通知地址
+    'notify_url'  => ***************,
+    // 支付成功返回地址
+    'return_url' => **************
+];
+
+$pay = Qspay::instance('alipay', $config);
+
+echo $pay->pay([
+    'out_trade_no' => time(), // 商户订单号
+    'total_amount' => '0.01',    // 支付金额
+    'subject'      => '支付订单描述', // 支付订单描述
+    'body' => '订单详情', //支付订单详情
+]);
+```
+
+#### 旧版接口 notify
+```php
+$config = [
+    'interface_type' => Qspay\Alipay::ALIPAY_INTERFACE_TYPE_DONATEV3,
+    //合作伙伴身份(PID)
+    'partner' => ***************,
+    //MD5密钥
+    'key'  => *************,
+    // 支付宝登录邮箱
+    'seller_email' => ********************,
+    //采用传输协议 http or https
+    'transport' => ****,
+    // 支付成功回调通知地址
+    'notify_url'  => ***************,
+    // 支付成功返回地址
+    'return_url' => **************
+];
+
+$pay = Qspay::instance('alipay', $config);
+$pay->notifyHandle(function($notify_param){
+    //处理业务逻辑
+    //返回 true 表示处理成功
+    //返回 错误字符串表示处理失败
+});
+```
+
 
 ### 银联
 

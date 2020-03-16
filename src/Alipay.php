@@ -1,6 +1,8 @@
 <?php
 namespace Qspay;
 
+use Qspay\Alipay\Pc\AlipayPc;
+use Qspay\Alipay\Wap\AlipayWap;
 use We;
 use Closure;
 use Exception;
@@ -8,14 +10,31 @@ use Mobile_Detect;
 
 class Alipay extends BasePay{
 
+    const ALIPAY_INTERFACE_TYPE_DONATEV3 = 1;
+    const ALIPAY_INTERFACE_TYPE_DONATE_NEW = 2;
+
     protected $app;
 
     protected $require_key = [
-        'appid', 'public_key', 'private_key'
+        'inteface_type'
     ];
 
     protected function setConfig($config)
     {
+        switch($config['interface_type']){
+            case self::ALIPAY_INTERFACE_TYPE_DONATE_NEW:
+                self::setConfigForDonateNew($config);
+                break;
+            case self::ALIPAY_INTERFACE_TYPE_DONATEV3:
+                self::setConfigForDonateV3($config);
+                break;
+            default:
+                throw new Exception("error interface_type");
+                break;
+        }
+    }
+
+    protected function setConfigForDonateNew($config){
         $detect = new Mobile_Detect;
         if($detect->isMobile()){
             $this->app = We::AliPayWap($config);
@@ -23,7 +42,16 @@ class Alipay extends BasePay{
         else{
             $this->app = We::AliPayWeb($config);
         }
+    }
 
+    protected function setConfigForDonateV3($config){
+        $detect = new Mobile_Detect;
+        if($detect->isMobile()){
+            $this->app = new AlipayWap($config);
+        }
+        else{
+            $this->app = new AlipayPc($config);
+        }
     }
 
     public function wapPay($order){
