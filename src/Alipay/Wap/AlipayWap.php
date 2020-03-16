@@ -15,7 +15,7 @@ class AlipayWap extends Alipay {
 
         //ca证书路径地址，用于curl中ssl校验
         //请保证cacert.pem文件在当前文件夹目录中
-        $alipay_config['cacert']    = __DIR__ . '/cacert.pem';
+        $alipay_config['cacert']    = __DIR__ . '/../Common/cacert.pem';
 
         // 支付类型 ，无需修改
         $alipay_config['payment_type'] = "4";
@@ -26,7 +26,11 @@ class AlipayWap extends Alipay {
         return $alipay_config;
     }
 
-    public function apply($out_trade_no, $subject, $body, $amount){
+    public function apply($order){
+        $out_trade_no = $order['out_trade_no'];
+        $subject = $order['subject'];
+        $body = $order['body'];
+        $amount = $order['total_amount'];
 
         $config = $this->_config;
 
