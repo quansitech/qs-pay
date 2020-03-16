@@ -8,7 +8,7 @@ class Alipay{
     protected $_config;
 
     public function __construct($p_config = '') {
-        $config = self::getConfig();
+        $config = $this->getConfig();
         if($p_config){
             $config = array_merge($config, $p_config);
             $config['seller_id'] = $config['partner'];
