@@ -6,7 +6,7 @@ use Qspay\Alipay\Alipay;
 class AlipayWap extends Alipay {
 
 
-    static function getConfig(){
+    public function getConfig(){
         //签名方式
         $alipay_config['sign_type']    = strtoupper('MD5');
 

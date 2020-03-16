@@ -16,7 +16,7 @@ class Alipay extends BasePay{
     protected $app;
 
     protected $require_key = [
-        'inteface_type'
+        'interface_type'
     ];
 
     protected function setConfig($config)

@@ -39,7 +39,7 @@ class AlipayPc extends Alipay {
         echo $html_text;
     }
 
-    static function getConfig(){
+    public function getConfig(){
         $config['sign_type'] = 'MD5';
         $config['input_charset'] = 'utf-8';
         $config['cacert'] = __DIR__ . '/cacert.pem';
