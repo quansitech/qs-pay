@@ -255,5 +255,44 @@ $qspay->notifyHandle(function($post_data){
 });
 ```
 
+## 设置订单超时时间
+
+#### 支付宝(旧版)
+在pay方法参数中加入it_b_pay参数，具体参数设置请查看[支付宝API文档](https://opendocs.alipay.com/open/62/104743)
+```php
+$pay->pay([
+    'out_trade_no' => time(), // 商户订单号
+    'total_amount' => '0.01',    // 支付金额
+    'subject'      => '支付订单描述', // 支付订单描述
+    'return_url' => '**********',
+    'it_b_pay'   => '10m',
+]);
+```
+
+#### 支付宝(新版)
+在pay方法参数中加入time_expire参数，具体参数设置请查看[支付宝API文档](https://opendocs.alipay.com/apis/api_1/alipay.trade.wap.pay)
+```php
+$pay->pay([
+    'out_trade_no' => time(), // 商户订单号
+    'total_amount' => '0.01',    // 支付金额
+    'subject'      => '支付订单描述', // 支付订单描述
+    'return_url' => '**********',
+    'time_expire'   => '2016-12-31 10:05',
+]);
+```
+
+#### 微信
+在pay方法参数中加入time_expire参数，具体参数设置请查看[微信API文档](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1)
+```php
+$pay->pay([
+    'body' => '测试',
+    'out_trade_no' => time(),
+    'total_fee' => 1,
+    'openid' => session('test_openid'),
+    'time_expire' => '20091227091010',
+]);
+```
+
 ## lincense
 [MIT License](https://github.com/tiderjian/lara-for-tp/blob/master/LICENSE.MIT) 
+
