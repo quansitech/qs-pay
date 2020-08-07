@@ -27,7 +27,7 @@ class AlipayPc extends Alipay {
             "subject"	=> $subject,
             "total_fee"	=> $amount,
             "body"	=> $body,
-            "it_b_pay" => '10m',
+            "it_b_pay" => $order['it_b_pay']?$order['it_b_pay']:'10m',
             "show_url"	=> '',
             "_input_charset"	=> 'utf-8',
             "extra_common_param" => ''

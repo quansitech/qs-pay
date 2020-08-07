@@ -50,9 +50,8 @@ class AlipayWap extends Alipay {
             "total_fee"	=> $amount,
             "show_url"	=> "",
             "app_pay"	=> "Y",//启用此参数能唤起钱包APP支付宝
-            "it_b_pay" => "2m",
             "body"	=> $body,
-            "it_b_pay" => '10m',
+            "it_b_pay" => $order['it_b_pay']?$order['it_b_pay']:'10m',
         );
         $html_text = $this->_alipay_submit->buildRequestForm($parameter, 'get', '确认');
 
