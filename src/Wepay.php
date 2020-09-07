@@ -21,6 +21,9 @@ class Wepay extends BasePay{
     public function wapPay($order){
         $order['trade_type'] = 'JSAPI';
         $result = $this->app->order->unify($order);
+        if (!$result['prepay_id']){
+            E(json_encode($result));
+        }
         $jssdk = $this->app->jssdk;
 
         return $jssdk->bridgeConfig($result['prepay_id']);
@@ -29,6 +32,9 @@ class Wepay extends BasePay{
     public function pcPay($order){
         $order['trade_type'] = 'NATIVE';
         $result = $this->app->order->unify($order);
+        if (!$result['prepay_id']){
+            E(json_encode($result));
+        }
 
         if($result['return_code'] == 'FAIL'){
             throw new Exception($result['return_msg']);
